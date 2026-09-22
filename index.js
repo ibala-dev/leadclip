@@ -5,10 +5,17 @@ let ulEl = document.getElementById("ul-l")
 
 inputButton.addEventListener("click", () => {
     myLeads.push(inputEl.value)
+     inputEl.value = ''
     renderLeads()
-    inputEl.value = ''
 })
 function renderLeads() {
-    let listItems = "<li>" + inputEl.value + "</li>"
-    ulEl.innerHTML += listItems
+    
+    lead = myLeads.length - 1
+    let a = document.createElement("a")
+    lead = myLeads[lead]
+    a.href = "lead"
+    a.textContent = lead
+    let li = document.createElement("li")
+    li.appendChild(a)
+    ulEl.appendChild(li)
 }
