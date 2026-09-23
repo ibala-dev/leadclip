@@ -14,18 +14,17 @@ body {
 
 #input-btn {
   margin-top: 20px;
-  padding: 20px;
+  padding: 10px  20px;
   background-color: #5f9341;
   color: aliceblue;
   font-size: large;
   font-weight: 750;
-  border: 1px solid;
+  border: 2px solid #5f9341;
 }
 
 ul {
   color: #5f9341;
   list-style: none;
-
   padding-top: 5px;
   padding-left: 0px;
 }
@@ -38,4 +37,15 @@ li{
 }
 a {
   color: #5f9341;
+}
+
+#delete-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  color: #5f9341;
+  font-size: large;
+  font-weight: 750;
+  border: 2px solid;
+  
+
 }
