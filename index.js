@@ -3,15 +3,23 @@ const inputEl = document.getElementById("input-el")
 const inputButton = document.getElementById("input-btn")
 const ulEl = document.getElementById("ul-l")
 const leadsFromLocalStorage = localStorage.getItem("myLeads")
-let actualItem = leadsFromLocalStorage ? JSON.parse(leadsFromLocalStorage) : null
+let actualItem = null
+
 let deleteButton = document.getElementById("delete-btn")
 let tabBtn = document.getElementById("tab-btn")
 
+try {
+    actualItem = JSON.parse(localStorage.getItem("myLeads"))
+} catch (e) {
+    localStorage.removeItem("myLeads")
+}
+
 tabBtn.addEventListener("click", () => {
-    let currentTab = window.location.href
-    myLeads.push(currentTab)
-    localStorage.setItem("myLeads", JSON.stringify(myLeads))
-    render()
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+        myLeads.push(tabs[0].url)
+        localStorage.setItem("myLeads", JSON.stringify(myLeads))
+        render()
+    })
 })
 
 if (actualItem) {
@@ -20,10 +28,10 @@ if (actualItem) {
 }
 
 function render() {
-    ulEl.innerHTML=''
+    ulEl.innerHTML = ''
     myLeads.forEach(lead => {
         let a = document.createElement("a")
-        a.href = "#"
+        a.href = "lead"
         a.target = "_blank"
         a.textContent = lead
         let li = document.createElement("li")
@@ -45,7 +53,7 @@ inputButton.addEventListener("click", () => {
 })
 
 deleteButton.addEventListener("click", () => {
-    localStorage.removeItem("myLeads")
+    localStorage.clear()
     myLeads = []
     render()
 })
